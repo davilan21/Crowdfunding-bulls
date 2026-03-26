@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 
+export const dynamic = 'force-dynamic'
+
 export async function POST(req: NextRequest) {
   try {
     const { asesoriaId, name, email, phone, notes } = await req.json()
@@ -16,7 +18,6 @@ export async function POST(req: NextRequest) {
         email,
         phone,
         notes,
-        // userId is optional for bookings — guests can book too
         userId: undefined,
         status: 'PENDING',
       },
