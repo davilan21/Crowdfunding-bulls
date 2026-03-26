@@ -1,0 +1,112 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String   @id @default(cuid())
+  name        String
+  email       String   @unique
+  password    String
+  role        String   @default("INVESTOR") // INVESTOR | PUBLISHER | ADMIN
+  phone       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  campaigns   Campaign[]
+  investments Investment[]
+  withdrawals Withdrawal[]
+  bookings    Booking[]
+}
+
+model Campaign {
+  id             String   @id @default(cuid())
+  title          String
+  titleEs        String
+  description    String
+  descriptionEs  String
+  targetAmount   Float
+  currentAmount  Float    @default(0)
+  returnRate     Float    // e.g. 15.0 = 15%
+  durationMonths Int      @default(12)
+  cowCount       Int
+  breed          String
+  location       String
+  imageUrl       String?
+  minInvestment  Float    @default(500)
+  status         String   @default("ACTIVE") // DRAFT | ACTIVE | FUNDED | COMPLETED | CANCELLED
+  startDate      DateTime?
+  endDate        DateTime?
+  publisherId    String
+  publisher      User     @relation(fields: [publisherId], references: [id])
+  investments    Investment[]
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Investment {
+  id             String   @id @default(cuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id])
+  campaignId     String
+  campaign       Campaign @relation(fields: [campaignId], references: [id])
+  amount         Float
+  expectedReturn Float
+  totalAtMaturity Float
+  status         String   @default("ACTIVE") // ACTIVE | COMPLETED | WITHDRAWN
+  maturityDate   DateTime
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  withdrawal     Withdrawal?
+}
+
+model Withdrawal {
+  id           String    @id @default(cuid())
+  userId       String
+  user         User      @relation(fields: [userId], references: [id])
+  investmentId String    @unique
+  investment   Investment @relation(fields: [investmentId], references: [id])
+  amount       Float
+  bankName     String?
+  accountNumber String?
+  routingNumber String?
+  notes        String?
+  status       String    @default("PENDING") // PENDING | APPROVED | PROCESSED | REJECTED
+  requestedAt  DateTime  @default(now())
+  processedAt  DateTime?
+}
+
+model Asesoria {
+  id            String    @id @default(cuid())
+  title         String
+  titleEs       String
+  description   String
+  descriptionEs String
+  type          String    // VIRTUAL | PHYSICAL
+  price         Float
+  durationMins  Int
+  features      String    // JSON array stored as string
+  publisherId   String
+  isActive      Boolean   @default(true)
+  bookings      Booking[]
+  createdAt     DateTime  @default(now())
+}
+
+model Booking {
+  id          String    @id @default(cuid())
+  userId      String?
+  user        User?     @relation(fields: [userId], references: [id])
+  asesoriaId  String
+  asesoria    Asesoria  @relation(fields: [asesoriaId], references: [id])
+  scheduledAt DateTime?
+  name        String
+  email       String
+  phone       String?
+  notes       String?
+  status      String    @default("PENDING") // PENDING | CONFIRMED | COMPLETED | CANCELLED
+  createdAt   DateTime  @default(now())
+}
