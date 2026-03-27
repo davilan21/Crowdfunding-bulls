@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { prisma } from '@/lib/prisma'
 import CampaignCard from '@/components/CampaignCard'
+import InvestmentCalculator from '@/components/InvestmentCalculator'
 import { TrendingUp, Shield, BarChart3, CheckCircle, Video, MapPin, Award, Users } from 'lucide-react'
 
 async function getHomeData() {
@@ -268,6 +269,9 @@ function HomeContent({
           </div>
         </div>
       </section>
+
+      {/* Investment Calculator */}
+      <InvestmentCalculator />
 
       {/* About Us */}
       <section id="about-us" className="py-24 bg-gradient-to-br from-brand-950 via-brand-900 to-brand-950 overflow-hidden relative">
