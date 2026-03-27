@@ -40,6 +40,12 @@ export default function Navbar() {
             >
               {t('asesorias')}
             </Link>
+            <Link
+              href={link('/#about-us')}
+              className="text-sm font-medium text-gray-600 hover:text-brand-700 transition-colors"
+            >
+              {t('aboutUs')}
+            </Link>
           </div>
 
           {/* Right side */}
@@ -120,6 +126,13 @@ export default function Navbar() {
             onClick={() => setOpen(false)}
           >
             {t('asesorias')}
+          </Link>
+          <Link
+            href={link('/#about-us')}
+            className="block text-sm font-medium text-gray-700 py-2"
+            onClick={() => setOpen(false)}
+          >
+            {t('aboutUs')}
           </Link>
           {session ? (
             <>
