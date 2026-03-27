@@ -33,6 +33,8 @@ async function main() {
     },
   })
 
+  const VIDEO_URL = 'https://www.youtube.com/watch?v=QAHCIHSIK7U'
+
   // Create campaigns
   const now = new Date()
   const endDate = new Date(now)
@@ -40,7 +42,7 @@ async function main() {
 
   const campaign1 = await prisma.campaign.upsert({
     where: { id: 'campaign-brahman-001' },
-    update: {},
+    update: { videoUrl: VIDEO_URL },
     create: {
       id: 'campaign-brahman-001',
       title: 'Brahman Cattle — Córdoba',
@@ -55,6 +57,7 @@ async function main() {
       breed: 'Brahman',
       location: 'Montería, Córdoba',
       imageUrl: 'https://images.unsplash.com/photo-1570042225831-d98fa7577f1e?w=800&q=80',
+      videoUrl: VIDEO_URL,
       minInvestment: 500,
       status: 'ACTIVE',
       startDate: now,
@@ -65,7 +68,7 @@ async function main() {
 
   const campaign2 = await prisma.campaign.upsert({
     where: { id: 'campaign-angus-002' },
-    update: {},
+    update: { videoUrl: VIDEO_URL },
     create: {
       id: 'campaign-angus-002',
       title: 'Angus × Zebu Cross — Antioquia',
@@ -80,6 +83,7 @@ async function main() {
       breed: 'Angus × Cebú',
       location: 'Caucasia, Antioquia',
       imageUrl: 'https://images.unsplash.com/photo-1596733430284-f7437764b1a9?w=800&q=80',
+      videoUrl: VIDEO_URL,
       minInvestment: 500,
       status: 'ACTIVE',
       startDate: now,
@@ -90,7 +94,7 @@ async function main() {
 
   const campaign3 = await prisma.campaign.upsert({
     where: { id: 'campaign-cebu-003' },
-    update: {},
+    update: { videoUrl: VIDEO_URL },
     create: {
       id: 'campaign-cebu-003',
       title: 'Cebu Cattle — Llanos Orientales',
