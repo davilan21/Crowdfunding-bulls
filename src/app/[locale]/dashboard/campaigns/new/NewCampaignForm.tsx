@@ -26,6 +26,10 @@ export default function NewCampaignForm({ locale }: { locale: string }) {
     location: '',
     minInvestment: '500',
     imageUrl: '',
+    videoUrl: '',
+    mediaGallery: '',
+    hasInsurance: false,
+    insuranceDetails: '',
   })
 
   const set = (field: string, value: string) => setForm(f => ({ ...f, [field]: value }))
@@ -172,6 +176,47 @@ export default function NewCampaignForm({ locale }: { locale: string }) {
               <input type="url" value={form.imageUrl} onChange={e => set('imageUrl', e.target.value)}
                 className="w-full px-3 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm" placeholder="https://..." />
             </div>
+          </div>
+
+          {/* Media & Rules */}
+          <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 space-y-4">
+            <h2 className="font-bold text-gray-900">Media & Protection</h2>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t('videoUrl')}</label>
+              <input type="url" value={form.videoUrl} onChange={e => set('videoUrl', e.target.value)}
+                className="w-full px-3 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm" placeholder="https://youtube.com/watch?v=..." />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t('mediaGallery')}</label>
+              <textarea
+                value={form.mediaGallery}
+                onChange={e => set('mediaGallery', e.target.value)}
+                rows={3}
+                className="w-full px-3 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm resize-none"
+                placeholder="https://photo1.jpg, https://photo2.jpg, ..."
+              />
+            </div>
+            <label className="flex items-center gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={form.hasInsurance}
+                onChange={e => setForm(f => ({ ...f, hasInsurance: e.target.checked }))}
+                className="w-4 h-4 accent-brand-600 rounded"
+              />
+              <span className="text-sm font-medium text-gray-700">{t('hasInsurance')}</span>
+            </label>
+            {form.hasInsurance && (
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">{t('insuranceDetails')}</label>
+                <textarea
+                  value={form.insuranceDetails}
+                  onChange={e => set('insuranceDetails', e.target.value)}
+                  rows={3}
+                  className="w-full px-3 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm resize-none"
+                  placeholder="Describe the insurance coverage, provider, limits..."
+                />
+              </div>
+            )}
           </div>
 
           {error && <div className="text-red-600 text-sm bg-red-50 px-4 py-3 rounded-xl">{error}</div>}

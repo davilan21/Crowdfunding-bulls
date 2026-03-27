@@ -37,7 +37,11 @@ model Campaign {
   cowCount       Int
   breed          String
   location       String
-  imageUrl       String?
+  imageUrl         String?
+  videoUrl         String?   // YouTube or direct video URL
+  mediaGallery     String?   // JSON: ["url1", "url2", ...]
+  hasInsurance     Boolean   @default(false)
+  insuranceDetails String?   // Custom insurance text for this campaign
   minInvestment  Float    @default(500)
   status         String   @default("ACTIVE") // DRAFT | ACTIVE | FUNDED | COMPLETED | CANCELLED
   startDate      DateTime?

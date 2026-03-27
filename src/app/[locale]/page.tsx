@@ -2,7 +2,7 @@ import { useTranslations, useLocale } from 'next-intl'
 import Link from 'next/link'
 import { prisma } from '@/lib/prisma'
 import CampaignCard from '@/components/CampaignCard'
-import { TrendingUp, Shield, BarChart3, CheckCircle, Video, MapPin } from 'lucide-react'
+import { TrendingUp, Shield, BarChart3, CheckCircle, Video, MapPin, Award, Users } from 'lucide-react'
 
 async function getHomeData() {
   const [campaigns, totalInvested, investorCount] = await Promise.all([
@@ -59,54 +59,163 @@ function HomeContent({
   return (
     <>
       {/* Hero */}
-      <section className="relative min-h-[92vh] bg-gradient-to-br from-brand-950 via-brand-900 to-brand-800 flex items-center overflow-hidden">
-        {/* Decorative circles */}
-        <div className="absolute top-20 right-10 w-96 h-96 bg-brand-700/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-10 left-10 w-64 h-64 bg-brand-500/10 rounded-full blur-2xl" />
+      <section className="relative min-h-[92vh] flex items-center overflow-hidden" style={{ background: '#030f07' }}>
+        {/* Fintech grid background */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/images/hero-bg.svg')" }}
+        />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <div className="max-w-3xl">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 bg-brand-700/40 border border-brand-600/50 text-brand-300 px-4 py-2 rounded-full text-sm font-medium mb-8">
-              <span>🐄</span>
-              <span>{t('hero.badge')}</span>
+        {/* Subtle left-side gradient for text legibility */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent" />
+
+        {/* Accent glow top-right */}
+        <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-brand-600/8 rounded-full blur-3xl" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 w-full">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+
+            {/* Left: copy */}
+            <div>
+              {/* Live badge */}
+              <div className="inline-flex items-center gap-2.5 bg-white/5 border border-brand-500/30 text-brand-300 px-4 py-2 rounded-full text-sm font-semibold mb-8 backdrop-blur-sm">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-400" />
+                </span>
+                {t('hero.badge')}
+              </div>
+
+              {/* Headline */}
+              <h1 className="text-5xl md:text-6xl font-black text-white mb-6 leading-[1.08] tracking-tight">
+                {t('hero.title')}
+                <br />
+                <span className="text-brand-400">{t('hero.titleHighlight')}</span>
+              </h1>
+
+              <p className="text-lg text-brand-200/80 mb-10 max-w-lg leading-relaxed">
+                {t('hero.subtitle')}
+              </p>
+
+              <div className="flex flex-wrap gap-4">
+                <Link
+                  href={link('/campaigns')}
+                  className="bg-brand-400 text-brand-950 px-8 py-3.5 rounded-xl font-bold text-base hover:bg-brand-300 transition-all shadow-lg shadow-brand-500/20"
+                >
+                  {t('hero.ctaInvest')}
+                </Link>
+                <Link
+                  href="#how-it-works"
+                  className="border border-brand-700 text-brand-300 px-8 py-3.5 rounded-xl font-medium text-base hover:border-brand-500 hover:text-white transition-all backdrop-blur-sm"
+                >
+                  {t('hero.ctaLearn')}
+                </Link>
+              </div>
+
+              {/* Mini trust row */}
+              <div className="flex items-center gap-6 mt-10">
+                <div className="flex items-center gap-1.5 text-brand-500 text-xs">
+                  <CheckCircle size={13} className="text-brand-500" />
+                  Verified operations
+                </div>
+                <div className="flex items-center gap-1.5 text-brand-500 text-xs">
+                  <CheckCircle size={13} className="text-brand-500" />
+                  SEC-compliant structure
+                </div>
+                <div className="flex items-center gap-1.5 text-brand-500 text-xs">
+                  <CheckCircle size={13} className="text-brand-500" />
+                  Real-time tracking
+                </div>
+              </div>
             </div>
 
-            {/* Headline */}
-            <h1 className="text-5xl md:text-7xl font-black text-white mb-6 leading-[1.05]">
-              {t('hero.title')}
-              <br />
-              <span className="text-brand-400">{t('hero.titleHighlight')}</span>
-            </h1>
+            {/* Right: floating investment card */}
+            <div className="hidden lg:flex flex-col items-end gap-4">
 
-            <p className="text-xl text-brand-200 mb-10 max-w-xl leading-relaxed">
-              {t('hero.subtitle')}
-            </p>
+              {/* Main campaign card */}
+              <div className="w-full max-w-sm bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl">
+                <div className="flex items-center justify-between mb-5">
+                  <div>
+                    <div className="text-xs text-brand-500 font-medium uppercase tracking-widest mb-1">Active Campaign</div>
+                    <div className="text-white font-bold text-lg leading-tight">Brahman Cattle</div>
+                    <div className="text-brand-400 text-xs mt-0.5 flex items-center gap-1">
+                      <MapPin size={10} /> Montería, Córdoba
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-3xl font-black text-brand-400">18%</div>
+                    <div className="text-xs text-brand-600">Annual ROI</div>
+                  </div>
+                </div>
 
-            <div className="flex flex-wrap gap-4">
-              <Link
-                href={link('/campaigns')}
-                className="bg-brand-400 text-brand-950 px-8 py-4 rounded-xl font-bold text-lg hover:bg-brand-300 transition-all shadow-lg shadow-brand-900/50"
-              >
-                {t('hero.ctaInvest')}
-              </Link>
-              <Link
-                href="#how-it-works"
-                className="border-2 border-brand-600 text-brand-300 px-8 py-4 rounded-xl font-medium text-lg hover:border-brand-400 hover:text-white transition-all"
-              >
-                {t('hero.ctaLearn')}
-              </Link>
+                {/* Mini chart bars */}
+                <div className="flex items-end gap-1.5 h-12 mb-5">
+                  {[40, 55, 48, 70, 62, 80, 75, 90, 85, 100, 95, 112].map((h, i) => (
+                    <div
+                      key={i}
+                      className="flex-1 rounded-sm"
+                      style={{
+                        height: `${h}%`,
+                        background: i === 11
+                          ? '#4ade80'
+                          : `rgba(74,222,128,${0.15 + i * 0.05})`,
+                      }}
+                    />
+                  ))}
+                </div>
+
+                {/* Progress */}
+                <div className="mb-5">
+                  <div className="flex justify-between text-xs text-brand-500 mb-1.5">
+                    <span>$112,500 raised</span>
+                    <span className="text-brand-400 font-semibold">75%</span>
+                  </div>
+                  <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
+                    <div className="h-full bg-gradient-to-r from-brand-600 to-brand-400 rounded-full" style={{ width: '75%' }} />
+                  </div>
+                  <div className="text-xs text-brand-600 mt-1">Target: $150,000</div>
+                </div>
+
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-1.5 text-brand-500 text-xs">
+                    <Users size={12} />
+                    42 investors
+                  </div>
+                  <Link
+                    href={link('/campaigns')}
+                    className="text-xs bg-brand-500/20 hover:bg-brand-500/30 text-brand-300 border border-brand-600/30 px-3 py-1.5 rounded-lg font-semibold transition-colors"
+                  >
+                    View Campaign →
+                  </Link>
+                </div>
+              </div>
+
+              {/* Small return projection card */}
+              <div className="w-72 bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-4 shadow-xl">
+                <div className="text-xs text-brand-500 font-medium mb-3">Return Projection · $5,000 invested</div>
+                <div className="flex justify-between items-end">
+                  <div>
+                    <div className="text-2xl font-black text-white">$5,900</div>
+                    <div className="text-xs text-brand-500 mt-0.5">at maturity · 12 months</div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-brand-400 font-black text-lg">+$900</div>
+                    <div className="text-xs text-brand-600">profit</div>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
 
         {/* Stats bar */}
-        <div className="absolute bottom-0 left-0 right-0 bg-brand-950/60 backdrop-blur-sm border-t border-brand-800/50">
+        <div className="absolute bottom-0 left-0 right-0 z-10 border-t border-white/5 bg-black/40 backdrop-blur-md">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 grid grid-cols-2 md:grid-cols-4 gap-4">
             {stats.map((s) => (
               <div key={s.label} className="text-center">
                 <div className="text-xl md:text-2xl font-black text-brand-300">{s.value}</div>
-                <div className="text-xs text-brand-500 mt-0.5">{s.label}</div>
+                <div className="text-xs text-brand-600 mt-0.5">{s.label}</div>
               </div>
             ))}
           </div>
@@ -155,6 +264,114 @@ function HomeContent({
             {campaigns.map((c) => (
               <CampaignCard key={c.id} campaign={c} />
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* About Us */}
+      <section className="py-24 bg-gradient-to-br from-brand-950 via-brand-900 to-brand-950 overflow-hidden relative">
+        {/* Subtle background pattern */}
+        <div className="absolute inset-0 opacity-5"
+          style={{ backgroundImage: "url('/images/cow-pattern.svg')", backgroundSize: 'cover', backgroundPosition: 'center' }}
+        />
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-700/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-brand-500/8 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+
+            {/* Left: text */}
+            <div>
+              <div className="inline-flex items-center gap-2 bg-brand-700/30 border border-brand-600/40 text-brand-300 px-4 py-2 rounded-full text-sm font-semibold mb-8 backdrop-blur-sm">
+                <Award size={14} />
+                <span>{t('aboutUs.badge')}</span>
+              </div>
+
+              <h2 className="text-4xl md:text-5xl font-black text-white mb-2 leading-tight">
+                {t('aboutUs.title')}
+              </h2>
+              <h2 className="text-4xl md:text-5xl font-black text-brand-400 mb-8 leading-tight">
+                {t('aboutUs.titleHighlight')}
+              </h2>
+
+              <p className="text-brand-200 text-lg leading-relaxed mb-5">
+                {t('aboutUs.bio1')}
+              </p>
+              <p className="text-brand-300 leading-relaxed mb-10">
+                {t('aboutUs.bio2')}
+              </p>
+
+              {/* Stats row */}
+              <div className="grid grid-cols-3 gap-6 mb-10">
+                {[
+                  { value: t('aboutUs.stat1Value'), label: t('aboutUs.stat1Label') },
+                  { value: t('aboutUs.stat2Value'), label: t('aboutUs.stat2Label') },
+                  { value: t('aboutUs.stat3Value'), label: t('aboutUs.stat3Label') },
+                ].map((s) => (
+                  <div key={s.label} className="border-l-2 border-brand-600 pl-4">
+                    <div className="text-3xl font-black text-brand-300">{s.value}</div>
+                    <div className="text-xs text-brand-500 mt-1 leading-tight">{s.label}</div>
+                  </div>
+                ))}
+              </div>
+
+              <Link
+                href={link('/asesorias')}
+                className="inline-flex items-center gap-2 bg-brand-400 text-brand-950 px-7 py-3.5 rounded-xl font-bold hover:bg-brand-300 transition-all shadow-lg shadow-brand-900/40"
+              >
+                {t('aboutUs.ctaLabel')} →
+              </Link>
+            </div>
+
+            {/* Right: profile card */}
+            <div className="flex justify-center lg:justify-end">
+              <div className="relative w-full max-w-sm">
+                {/* Glow behind card */}
+                <div className="absolute inset-0 bg-brand-500/10 rounded-3xl blur-2xl scale-110" />
+
+                <div className="relative bg-brand-900/60 backdrop-blur-sm border border-brand-700/50 rounded-3xl p-8 shadow-2xl">
+                  {/* Avatar */}
+                  <div className="flex justify-center mb-6">
+                    <div className="relative">
+                      <div className="w-28 h-28 rounded-2xl bg-gradient-to-br from-brand-600 to-brand-800 flex items-center justify-center shadow-xl shadow-brand-950/60">
+                        <span className="text-5xl font-black text-white">C</span>
+                      </div>
+                      <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-brand-400 rounded-lg flex items-center justify-center shadow-md">
+                        <span className="text-brand-950 text-xs">🐄</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Name & title */}
+                  <div className="text-center mb-6">
+                    <h3 className="text-xl font-black text-white">Carlos Eduardo Pinzon</h3>
+                    <p className="text-brand-400 text-sm mt-1">Founder & Head of Operations</p>
+                  </div>
+
+                  {/* Divider */}
+                  <div className="border-t border-brand-700/50 mb-6" />
+
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-2 justify-center">
+                    {[
+                      { icon: Award, label: t('aboutUs.tag1') },
+                      { icon: MapPin, label: t('aboutUs.tag2') },
+                      { icon: Users, label: t('aboutUs.tag3') },
+                      { icon: BarChart3, label: t('aboutUs.tag4') },
+                    ].map(({ icon: Icon, label }) => (
+                      <span
+                        key={label}
+                        className="inline-flex items-center gap-1.5 bg-brand-800/70 border border-brand-700/50 text-brand-300 text-xs px-3 py-1.5 rounded-full"
+                      >
+                        <Icon size={11} />
+                        {label}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>

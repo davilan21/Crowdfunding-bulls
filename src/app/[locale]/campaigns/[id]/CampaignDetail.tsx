@@ -4,7 +4,11 @@ import { useState } from 'react'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import Image from 'next/image'
-import { TrendingUp, Clock, Beef, MapPin, Users, ArrowLeft, CheckCircle } from 'lucide-react'
+import {
+  TrendingUp, Clock, Beef, MapPin, Users, ArrowLeft, CheckCircle,
+  Shield, Lock, CalendarCheck, AlertTriangle, BadgeCheck, Play,
+  Images,
+} from 'lucide-react'
 
 interface Campaign {
   id: string
@@ -20,10 +24,31 @@ interface Campaign {
   breed: string
   location: string
   imageUrl?: string | null
+  videoUrl?: string | null
+  mediaGallery?: string | null   // JSON: ["url1", "url2", ...]
+  hasInsurance: boolean
+  insuranceDetails?: string | null
   minInvestment: number
   status: string
   _count: { investments: number }
   publisher: { name: string }
+}
+
+function getYoutubeId(url: string): string | null {
+  const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/)
+  return match ? match[1] : null
+}
+
+function parseGallery(raw?: string | null): string[] {
+  if (!raw) return []
+  try {
+    const parsed = JSON.parse(raw)
+    if (Array.isArray(parsed)) return parsed.filter(Boolean)
+  } catch {
+    // comma-separated fallback
+    return raw.split(',').map(s => s.trim()).filter(Boolean)
+  }
+  return []
 }
 
 export default function CampaignDetail({
@@ -40,6 +65,7 @@ export default function CampaignDetail({
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState('')
+  const [activePhoto, setActivePhoto] = useState<string | null>(null)
 
   const numAmount = parseFloat(amount) || 0
   const expectedReturn = (numAmount * campaign.returnRate) / 100
@@ -49,6 +75,9 @@ export default function CampaignDetail({
 
   const title = locale === 'es' ? campaign.titleEs : campaign.title
   const description = locale === 'es' ? campaign.descriptionEs : campaign.description
+
+  const gallery = parseGallery(campaign.mediaGallery)
+  const youtubeId = campaign.videoUrl ? getYoutubeId(campaign.videoUrl) : null
 
   const handleInvest = async () => {
     if (!userId) {
@@ -108,12 +137,18 @@ export default function CampaignDetail({
           </Link>
         </div>
 
-        {/* Return badge */}
-        <div className="absolute bottom-6 left-6">
+        {/* Badges */}
+        <div className="absolute bottom-6 left-6 flex items-center gap-3">
           <span className="flex items-center gap-2 bg-brand-600 text-white px-4 py-2 rounded-full text-base font-bold shadow">
             <TrendingUp size={16} />
             {campaign.returnRate}% {t('returnRateLabel')}
           </span>
+          {campaign.hasInsurance && (
+            <span className="flex items-center gap-1.5 bg-emerald-600 text-white px-3 py-2 rounded-full text-sm font-semibold shadow">
+              <Shield size={14} />
+              Insured
+            </span>
+          )}
         </div>
       </div>
 
@@ -171,6 +206,134 @@ export default function CampaignDetail({
               <h2 className="font-bold text-gray-900 text-lg mb-3">{t('about')}</h2>
               <p className="text-gray-600 leading-relaxed">{description}</p>
             </div>
+
+            {/* ── Campaign Video ── */}
+            {youtubeId && (
+              <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center">
+                    <Play size={15} className="text-red-600 fill-red-600" />
+                  </div>
+                  <h2 className="font-bold text-gray-900 text-lg">{t('videoTitle')}</h2>
+                </div>
+                <div className="relative w-full rounded-xl overflow-hidden shadow-md" style={{ paddingBottom: '56.25%' }}>
+                  <iframe
+                    src={`https://www.youtube.com/embed/${youtubeId}?rel=0&modestbranding=1`}
+                    title={title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="absolute inset-0 w-full h-full"
+                  />
+                </div>
+              </div>
+            )}
+
+            {/* ── Photo Gallery ── */}
+            {gallery.length > 0 && (
+              <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-8 h-8 bg-brand-100 rounded-lg flex items-center justify-center">
+                    <Images size={15} className="text-brand-700" />
+                  </div>
+                  <h2 className="font-bold text-gray-900 text-lg">{t('galleryTitle')}</h2>
+                  <span className="ml-auto text-xs text-gray-400 bg-gray-100 px-2 py-1 rounded-full">{gallery.length} photos</span>
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                  {gallery.map((url, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setActivePhoto(url)}
+                      className="group relative aspect-[4/3] rounded-xl overflow-hidden bg-gray-100 hover:ring-2 hover:ring-brand-500 transition-all"
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={url}
+                        alt={`Farm photo ${i + 1}`}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
+                      <div className="absolute bottom-2 right-2 bg-black/50 text-white text-xs px-2 py-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                        {i + 1}/{gallery.length}
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* ── Rules & Protection ── */}
+            <div className="rounded-2xl overflow-hidden shadow-sm border border-brand-900/20">
+              {/* Header */}
+              <div className="bg-brand-950 px-6 py-5">
+                <div className="flex items-center gap-3 mb-1">
+                  <div className="w-9 h-9 bg-brand-800 rounded-xl flex items-center justify-center">
+                    <Shield size={18} className="text-brand-300" />
+                  </div>
+                  <h2 className="font-black text-white text-xl">{t('rulesTitle')}</h2>
+                </div>
+                <p className="text-brand-400 text-sm ml-12">{t('rulesSubtitle')}</p>
+              </div>
+
+              {/* Cards grid */}
+              <div className="bg-brand-950/95 p-6 grid md:grid-cols-2 gap-4">
+
+                {/* Rule 1 — Cow dies */}
+                <RuleCard
+                  icon={<AlertTriangle size={18} className="text-amber-400" />}
+                  iconBg="bg-amber-400/15 border border-amber-400/20"
+                  accent="border-l-amber-500"
+                  title={t('rule1Title')}
+                  desc={t('rule1Desc')}
+                />
+
+                {/* Rule 2 — Insurance */}
+                <RuleCard
+                  icon={<Shield size={18} className={campaign.hasInsurance ? 'text-emerald-400' : 'text-gray-400'} />}
+                  iconBg={campaign.hasInsurance
+                    ? 'bg-emerald-400/15 border border-emerald-400/20'
+                    : 'bg-gray-600/20 border border-gray-600/20'}
+                  accent={campaign.hasInsurance ? 'border-l-emerald-500' : 'border-l-gray-600'}
+                  title={campaign.hasInsurance ? t('rule2TitleInsured') : t('rule2TitleUninsured')}
+                  desc={campaign.insuranceDetails || (campaign.hasInsurance ? t('rule2DescInsured') : t('rule2DescUninsured'))}
+                  badge={campaign.hasInsurance
+                    ? <span className="inline-flex items-center gap-1 text-xs bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded-full font-semibold">
+                        <BadgeCheck size={11} /> {t('rule2Badge')}
+                      </span>
+                    : null}
+                />
+
+                {/* Rule 3 — When paid */}
+                <RuleCard
+                  icon={<CalendarCheck size={18} className="text-brand-400" />}
+                  iconBg="bg-brand-400/15 border border-brand-400/20"
+                  accent="border-l-brand-500"
+                  title={t('rule3Title')}
+                  desc={t('rule3Desc')}
+                />
+
+                {/* Rule 4 — No early exit */}
+                <RuleCard
+                  icon={<Lock size={18} className="text-yellow-400" />}
+                  iconBg="bg-yellow-400/15 border border-yellow-400/20"
+                  accent="border-l-yellow-500"
+                  title={t('rule4Title')}
+                  desc={t('rule4Desc')}
+                />
+
+                {/* Rule 5 — Verified — full width */}
+                <div className="md:col-span-2">
+                  <RuleCard
+                    icon={<BadgeCheck size={18} className="text-emerald-400" />}
+                    iconBg="bg-emerald-400/15 border border-emerald-400/20"
+                    accent="border-l-emerald-500"
+                    title={t('rule5Title')}
+                    desc={t('rule5Desc')}
+                  />
+                </div>
+
+              </div>
+            </div>
+
           </div>
 
           {/* Right: Investment panel */}
@@ -256,6 +419,59 @@ export default function CampaignDetail({
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Lightbox */}
+      {activePhoto && (
+        <div
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+          onClick={() => setActivePhoto(null)}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={activePhoto}
+            alt="Farm photo"
+            className="max-w-full max-h-full rounded-2xl shadow-2xl object-contain"
+            onClick={e => e.stopPropagation()}
+          />
+          <button
+            onClick={() => setActivePhoto(null)}
+            className="absolute top-6 right-6 text-white/70 hover:text-white text-3xl font-light leading-none"
+          >
+            ×
+          </button>
+        </div>
+      )}
+    </div>
+  )
+}
+
+function RuleCard({
+  icon,
+  iconBg,
+  accent,
+  title,
+  desc,
+  badge,
+}: {
+  icon: React.ReactNode
+  iconBg: string
+  accent: string
+  title: string
+  desc: string
+  badge?: React.ReactNode
+}) {
+  return (
+    <div className={`bg-brand-900/50 border-l-4 ${accent} rounded-r-xl p-5 flex gap-4`}>
+      <div className={`flex-shrink-0 w-9 h-9 rounded-xl ${iconBg} flex items-center justify-center mt-0.5`}>
+        {icon}
+      </div>
+      <div className="min-w-0">
+        <div className="flex items-center gap-2 mb-1.5 flex-wrap">
+          <h3 className="font-bold text-white text-sm">{title}</h3>
+          {badge}
+        </div>
+        <p className="text-brand-400 text-sm leading-relaxed">{desc}</p>
       </div>
     </div>
   )
