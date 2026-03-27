@@ -59,64 +59,163 @@ function HomeContent({
   return (
     <>
       {/* Hero */}
-      <section className="relative min-h-[92vh] flex items-center overflow-hidden bg-brand-950">
-        {/* Cow background image with green tint */}
+      <section className="relative min-h-[92vh] flex items-center overflow-hidden" style={{ background: '#030f07' }}>
+        {/* Fintech grid background */}
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('/images/cow-pattern.svg')" }}
+          style={{ backgroundImage: "url('/images/hero-bg.svg')" }}
         />
 
-        {/* Green gradient overlay for depth & brand feel */}
-        <div className="absolute inset-0 bg-gradient-to-br from-brand-950/90 via-brand-900/75 to-brand-800/60" />
+        {/* Subtle left-side gradient for text legibility */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent" />
 
-        {/* Animated glow orbs */}
-        <div className="absolute top-20 right-10 w-[500px] h-[500px] bg-brand-500/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-10 left-10 w-72 h-72 bg-brand-400/8 rounded-full blur-2xl" />
-        <div className="absolute top-1/2 right-1/4 w-48 h-48 bg-brand-300/5 rounded-full blur-2xl" />
+        {/* Accent glow top-right */}
+        <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-brand-600/8 rounded-full blur-3xl" />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <div className="max-w-3xl">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 bg-brand-600/30 border border-brand-400/40 text-brand-300 px-4 py-2 rounded-full text-sm font-semibold mb-8 backdrop-blur-sm shadow-lg shadow-brand-900/30">
-              <span className="text-base">🐄</span>
-              <span>{t('hero.badge')}</span>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 w-full">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+
+            {/* Left: copy */}
+            <div>
+              {/* Live badge */}
+              <div className="inline-flex items-center gap-2.5 bg-white/5 border border-brand-500/30 text-brand-300 px-4 py-2 rounded-full text-sm font-semibold mb-8 backdrop-blur-sm">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-400" />
+                </span>
+                {t('hero.badge')}
+              </div>
+
+              {/* Headline */}
+              <h1 className="text-5xl md:text-6xl font-black text-white mb-6 leading-[1.08] tracking-tight">
+                {t('hero.title')}
+                <br />
+                <span className="text-brand-400">{t('hero.titleHighlight')}</span>
+              </h1>
+
+              <p className="text-lg text-brand-200/80 mb-10 max-w-lg leading-relaxed">
+                {t('hero.subtitle')}
+              </p>
+
+              <div className="flex flex-wrap gap-4">
+                <Link
+                  href={link('/campaigns')}
+                  className="bg-brand-400 text-brand-950 px-8 py-3.5 rounded-xl font-bold text-base hover:bg-brand-300 transition-all shadow-lg shadow-brand-500/20"
+                >
+                  {t('hero.ctaInvest')}
+                </Link>
+                <Link
+                  href="#how-it-works"
+                  className="border border-brand-700 text-brand-300 px-8 py-3.5 rounded-xl font-medium text-base hover:border-brand-500 hover:text-white transition-all backdrop-blur-sm"
+                >
+                  {t('hero.ctaLearn')}
+                </Link>
+              </div>
+
+              {/* Mini trust row */}
+              <div className="flex items-center gap-6 mt-10">
+                <div className="flex items-center gap-1.5 text-brand-500 text-xs">
+                  <CheckCircle size={13} className="text-brand-500" />
+                  Verified operations
+                </div>
+                <div className="flex items-center gap-1.5 text-brand-500 text-xs">
+                  <CheckCircle size={13} className="text-brand-500" />
+                  SEC-compliant structure
+                </div>
+                <div className="flex items-center gap-1.5 text-brand-500 text-xs">
+                  <CheckCircle size={13} className="text-brand-500" />
+                  Real-time tracking
+                </div>
+              </div>
             </div>
 
-            {/* Headline */}
-            <h1 className="text-5xl md:text-7xl font-black text-white mb-6 leading-[1.05]">
-              {t('hero.title')}
-              <br />
-              <span className="text-brand-400">{t('hero.titleHighlight')}</span>
-            </h1>
+            {/* Right: floating investment card */}
+            <div className="hidden lg:flex flex-col items-end gap-4">
 
-            <p className="text-xl text-brand-200 mb-10 max-w-xl leading-relaxed">
-              {t('hero.subtitle')}
-            </p>
+              {/* Main campaign card */}
+              <div className="w-full max-w-sm bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl">
+                <div className="flex items-center justify-between mb-5">
+                  <div>
+                    <div className="text-xs text-brand-500 font-medium uppercase tracking-widest mb-1">Active Campaign</div>
+                    <div className="text-white font-bold text-lg leading-tight">Brahman Cattle</div>
+                    <div className="text-brand-400 text-xs mt-0.5 flex items-center gap-1">
+                      <MapPin size={10} /> Montería, Córdoba
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-3xl font-black text-brand-400">18%</div>
+                    <div className="text-xs text-brand-600">Annual ROI</div>
+                  </div>
+                </div>
 
-            <div className="flex flex-wrap gap-4">
-              <Link
-                href={link('/campaigns')}
-                className="bg-brand-400 text-brand-950 px-8 py-4 rounded-xl font-bold text-lg hover:bg-brand-300 transition-all shadow-lg shadow-brand-900/50"
-              >
-                {t('hero.ctaInvest')}
-              </Link>
-              <Link
-                href="#how-it-works"
-                className="border-2 border-brand-600 text-brand-300 px-8 py-4 rounded-xl font-medium text-lg hover:border-brand-400 hover:text-white transition-all"
-              >
-                {t('hero.ctaLearn')}
-              </Link>
+                {/* Mini chart bars */}
+                <div className="flex items-end gap-1.5 h-12 mb-5">
+                  {[40, 55, 48, 70, 62, 80, 75, 90, 85, 100, 95, 112].map((h, i) => (
+                    <div
+                      key={i}
+                      className="flex-1 rounded-sm"
+                      style={{
+                        height: `${h}%`,
+                        background: i === 11
+                          ? '#4ade80'
+                          : `rgba(74,222,128,${0.15 + i * 0.05})`,
+                      }}
+                    />
+                  ))}
+                </div>
+
+                {/* Progress */}
+                <div className="mb-5">
+                  <div className="flex justify-between text-xs text-brand-500 mb-1.5">
+                    <span>$112,500 raised</span>
+                    <span className="text-brand-400 font-semibold">75%</span>
+                  </div>
+                  <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
+                    <div className="h-full bg-gradient-to-r from-brand-600 to-brand-400 rounded-full" style={{ width: '75%' }} />
+                  </div>
+                  <div className="text-xs text-brand-600 mt-1">Target: $150,000</div>
+                </div>
+
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-1.5 text-brand-500 text-xs">
+                    <Users size={12} />
+                    42 investors
+                  </div>
+                  <Link
+                    href={link('/campaigns')}
+                    className="text-xs bg-brand-500/20 hover:bg-brand-500/30 text-brand-300 border border-brand-600/30 px-3 py-1.5 rounded-lg font-semibold transition-colors"
+                  >
+                    View Campaign →
+                  </Link>
+                </div>
+              </div>
+
+              {/* Small return projection card */}
+              <div className="w-72 bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-4 shadow-xl">
+                <div className="text-xs text-brand-500 font-medium mb-3">Return Projection · $5,000 invested</div>
+                <div className="flex justify-between items-end">
+                  <div>
+                    <div className="text-2xl font-black text-white">$5,900</div>
+                    <div className="text-xs text-brand-500 mt-0.5">at maturity · 12 months</div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-brand-400 font-black text-lg">+$900</div>
+                    <div className="text-xs text-brand-600">profit</div>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
 
         {/* Stats bar */}
-        <div className="absolute bottom-0 left-0 right-0 z-10 bg-brand-950/70 backdrop-blur-md border-t border-brand-700/40">
+        <div className="absolute bottom-0 left-0 right-0 z-10 border-t border-white/5 bg-black/40 backdrop-blur-md">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 grid grid-cols-2 md:grid-cols-4 gap-4">
             {stats.map((s) => (
               <div key={s.label} className="text-center">
                 <div className="text-xl md:text-2xl font-black text-brand-300">{s.value}</div>
-                <div className="text-xs text-brand-500 mt-0.5">{s.label}</div>
+                <div className="text-xs text-brand-600 mt-0.5">{s.label}</div>
               </div>
             ))}
           </div>
