@@ -7,7 +7,7 @@
     "signin": "Iniciar Sesión",
     "signup": "Comenzar",
     "signout": "Cerrar Sesión",
-    "logo": "Toros.co"
+    "logo": "Cowsfunding.co"
   },
   "home": {
     "hero": {
@@ -46,7 +46,7 @@
       "title": "El Experto Detrás de",
       "titleHighlight": "Cada Operación",
       "bio1": "Carlos Eduardo Pinzon lleva más de dos décadas construyendo una de las operaciones ganaderas más confiables de Colombia. Empezando con una sola finca en Córdoba, ha desarrollado una red que abarca las fértiles tierras de Antioquia y los vastos Llanos Orientales.",
-      "bio2": "Su filosofía es simple: gestión transparente, hatos saludables y retornos reales para los inversores. Carlos supervisa personalmente cada campaña en Toros.co — desde la selección del ganado hasta la coordinación de la venta final.",
+      "bio2": "Su filosofía es simple: gestión transparente, hatos saludables y retornos reales para los inversores. Carlos supervisa personalmente cada campaña en Cowsfunding.co — desde la selección del ganado hasta la coordinación de la venta final.",
       "stat1Value": "20+",
       "stat1Label": "Años de Experiencia",
       "stat2Value": "3",
@@ -60,7 +60,7 @@
       "ctaLabel": "Trabajar con Carlos"
     },
     "trust": {
-      "title": "¿Por qué Toros.co?",
+      "title": "¿Por qué Cowsfunding.co?",
       "item1Title": "Operaciones Verificadas",
       "item1Desc": "Cada campaña es auditada antes de publicarse. Conteos de ganado, ubicación de finca y registros veterinarios verificados.",
       "item2Title": "Seguimiento en Tiempo Real",
@@ -155,7 +155,7 @@
   },
   "auth": {
     "signinTitle": "Bienvenido de vuelta",
-    "signinSubtitle": "Inicia sesión en tu cuenta de Toros.co",
+    "signinSubtitle": "Inicia sesión en tu cuenta de Cowsfunding.co",
     "signupTitle": "Crea tu cuenta",
     "signupSubtitle": "Comienza a invertir en ganadería colombiana hoy",
     "email": "Correo Electrónico",

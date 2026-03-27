@@ -9,7 +9,7 @@ import Footer from '@/components/Footer'
 import '../globals.css'
 
 export const metadata: Metadata = {
-  title: 'Toros.co — Cattle Crowdfunding',
+  title: 'Cowsfunding.co — Cattle Crowdfunding',
   description: 'Invest in Colombian cattle operations and earn up to 20% annual returns.',
 }
 

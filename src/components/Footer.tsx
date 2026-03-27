@@ -14,7 +14,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-2 mb-3">
               <span className="text-2xl">🐄</span>
-              <span className="text-xl font-bold text-white">Toros.co</span>
+              <span className="text-xl font-bold text-white">Cowsfunding.co</span>
             </div>
             <p className="text-sm text-brand-400 max-w-xs">
               Crowdfunding ganadero. Invierte en ganado colombiano y gana hasta 20% anual.
@@ -46,7 +46,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-10 pt-6 border-t border-brand-900 text-center text-xs text-brand-600">
-          © {new Date().getFullYear()} Toros.co — All rights reserved.
+          © {new Date().getFullYear()} Cowsfunding.co — All rights reserved.
         </div>
       </div>
     </footer>

@@ -9,11 +9,11 @@ async function main() {
   // Create Carlos (publisher/admin)
   const hashedPassword = await bcrypt.hash('carlos123', 10)
   const carlos = await prisma.user.upsert({
-    where: { email: 'carlos@toros.co' },
+    where: { email: 'carlos@cowsfunding.co' },
     update: {},
     create: {
       name: 'Carlos Eduardo Pinzon',
-      email: 'carlos@toros.co',
+      email: 'carlos@cowsfunding.co',
       password: hashedPassword,
       role: 'PUBLISHER',
       phone: '+1 305 555 0100',
@@ -207,7 +207,7 @@ async function main() {
   })
 
   console.log('✅ Seeding complete!')
-  console.log(`   Carlos: carlos@toros.co / carlos123`)
+  console.log(`   Carlos: carlos@cowsfunding.co / carlos123`)
   console.log(`   Demo investor: demo@investor.com / demo1234`)
 }
 
