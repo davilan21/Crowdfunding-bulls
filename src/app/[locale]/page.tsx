@@ -1,5 +1,6 @@
 import { useTranslations, useLocale } from 'next-intl'
 import Link from 'next/link'
+import Image from 'next/image'
 import { prisma } from '@/lib/prisma'
 import CampaignCard from '@/components/CampaignCard'
 import { TrendingUp, Shield, BarChart3, CheckCircle, Video, MapPin, Award, Users } from 'lucide-react'
@@ -269,7 +270,7 @@ function HomeContent({
       </section>
 
       {/* About Us */}
-      <section className="py-24 bg-gradient-to-br from-brand-950 via-brand-900 to-brand-950 overflow-hidden relative">
+      <section id="about-us" className="py-24 bg-gradient-to-br from-brand-950 via-brand-900 to-brand-950 overflow-hidden relative">
         {/* Subtle background pattern */}
         <div className="absolute inset-0 opacity-5"
           style={{ backgroundImage: "url('/images/cow-pattern.svg')", backgroundSize: 'cover', backgroundPosition: 'center' }}
@@ -327,32 +328,35 @@ function HomeContent({
             <div className="flex justify-center lg:justify-end">
               <div className="relative w-full max-w-sm">
                 {/* Glow behind card */}
-                <div className="absolute inset-0 bg-brand-500/10 rounded-3xl blur-2xl scale-110" />
+                <div className="absolute inset-0 bg-brand-500/15 rounded-3xl blur-2xl scale-110" />
 
-                <div className="relative bg-brand-900/60 backdrop-blur-sm border border-brand-700/50 rounded-3xl p-8 shadow-2xl">
-                  {/* Avatar */}
-                  <div className="flex justify-center mb-6">
-                    <div className="relative">
-                      <div className="w-28 h-28 rounded-2xl bg-gradient-to-br from-brand-600 to-brand-800 flex items-center justify-center shadow-xl shadow-brand-950/60">
-                        <span className="text-5xl font-black text-white">C</span>
-                      </div>
-                      <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-brand-400 rounded-lg flex items-center justify-center shadow-md">
-                        <span className="text-brand-950 text-xs">🐄</span>
-                      </div>
+                <div className="relative bg-brand-900/60 backdrop-blur-sm border border-brand-700/50 rounded-3xl overflow-hidden shadow-2xl">
+                  {/* Photo */}
+                  <div className="relative w-full aspect-[3/4]">
+                    <Image
+                      src="/images/carlos.jpg"
+                      alt="Carlos Eduardo Pinzon"
+                      fill
+                      className="object-cover object-top"
+                    />
+                    {/* Gradient fade at bottom */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-brand-950 via-brand-950/30 to-transparent" />
+                    {/* 🐄 badge */}
+                    <div className="absolute top-4 right-4 bg-brand-400 text-brand-950 text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
+                      🐄 Founder
                     </div>
                   </div>
 
-                  {/* Name & title */}
-                  <div className="text-center mb-6">
+                  {/* Name & title — over the gradient */}
+                  <div className="px-6 pt-2 pb-6">
                     <h3 className="text-xl font-black text-white">Carlos Eduardo Pinzon</h3>
-                    <p className="text-brand-400 text-sm mt-1">Founder & Head of Operations</p>
-                  </div>
+                    <p className="text-brand-400 text-sm mt-0.5 mb-5">Founder & Head of Operations</p>
 
                   {/* Divider */}
-                  <div className="border-t border-brand-700/50 mb-6" />
+                  <div className="border-t border-brand-700/50 mb-5" />
 
                   {/* Tags */}
-                  <div className="flex flex-wrap gap-2 justify-center">
+                  <div className="flex flex-wrap gap-2">
                     {[
                       { icon: Award, label: t('aboutUs.tag1') },
                       { icon: MapPin, label: t('aboutUs.tag2') },
@@ -368,7 +372,8 @@ function HomeContent({
                       </span>
                     ))}
                   </div>
-                </div>
+                  </div>{/* end px-6 panel */}
+                </div>{/* end card */}
               </div>
             </div>
 
