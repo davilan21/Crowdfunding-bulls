@@ -40,6 +40,24 @@
       "subtitle": "Get personalized guidance from Carlos Eduardo Pinzon — 20+ years in Colombian cattle ranching.",
       "book": "Book a Session"
     },
+    "aboutUs": {
+      "badge": "About Us",
+      "title": "Meet the Expert Behind",
+      "titleHighlight": "Every Operation",
+      "bio1": "Carlos Eduardo Pinzon has spent over two decades building one of Colombia's most trusted cattle operations. Starting with a single farm in Córdoba, he has grown a network spanning the fertile plains of Antioquia and the vast Llanos Orientales.",
+      "bio2": "His philosophy is simple: transparent management, healthy herds, and real returns for investors. Carlos personally oversees every campaign on Toros.co — from selecting the cattle to coordinating the final sale.",
+      "stat1Value": "20+",
+      "stat1Label": "Years Experience",
+      "stat2Value": "3",
+      "stat2Label": "Regions Covered",
+      "stat3Value": "500+",
+      "stat3Label": "Investors Served",
+      "tag1": "Certified Rancher",
+      "tag2": "Córdoba · Antioquia · Llanos",
+      "tag3": "Herd Management",
+      "tag4": "Agri-Finance",
+      "ctaLabel": "Work with Carlos"
+    },
     "trust": {
       "title": "Why Toros.co?",
       "item1Title": "Verified Operations",

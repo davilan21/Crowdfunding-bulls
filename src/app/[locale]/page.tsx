@@ -2,7 +2,7 @@ import { useTranslations, useLocale } from 'next-intl'
 import Link from 'next/link'
 import { prisma } from '@/lib/prisma'
 import CampaignCard from '@/components/CampaignCard'
-import { TrendingUp, Shield, BarChart3, CheckCircle, Video, MapPin } from 'lucide-react'
+import { TrendingUp, Shield, BarChart3, CheckCircle, Video, MapPin, Award, Users } from 'lucide-react'
 
 async function getHomeData() {
   const [campaigns, totalInvested, investorCount] = await Promise.all([
@@ -165,6 +165,114 @@ function HomeContent({
             {campaigns.map((c) => (
               <CampaignCard key={c.id} campaign={c} />
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* About Us */}
+      <section className="py-24 bg-gradient-to-br from-brand-950 via-brand-900 to-brand-950 overflow-hidden relative">
+        {/* Subtle background pattern */}
+        <div className="absolute inset-0 opacity-5"
+          style={{ backgroundImage: "url('/images/cow-pattern.svg')", backgroundSize: 'cover', backgroundPosition: 'center' }}
+        />
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-700/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-brand-500/8 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+
+            {/* Left: text */}
+            <div>
+              <div className="inline-flex items-center gap-2 bg-brand-700/30 border border-brand-600/40 text-brand-300 px-4 py-2 rounded-full text-sm font-semibold mb-8 backdrop-blur-sm">
+                <Award size={14} />
+                <span>{t('aboutUs.badge')}</span>
+              </div>
+
+              <h2 className="text-4xl md:text-5xl font-black text-white mb-2 leading-tight">
+                {t('aboutUs.title')}
+              </h2>
+              <h2 className="text-4xl md:text-5xl font-black text-brand-400 mb-8 leading-tight">
+                {t('aboutUs.titleHighlight')}
+              </h2>
+
+              <p className="text-brand-200 text-lg leading-relaxed mb-5">
+                {t('aboutUs.bio1')}
+              </p>
+              <p className="text-brand-300 leading-relaxed mb-10">
+                {t('aboutUs.bio2')}
+              </p>
+
+              {/* Stats row */}
+              <div className="grid grid-cols-3 gap-6 mb-10">
+                {[
+                  { value: t('aboutUs.stat1Value'), label: t('aboutUs.stat1Label') },
+                  { value: t('aboutUs.stat2Value'), label: t('aboutUs.stat2Label') },
+                  { value: t('aboutUs.stat3Value'), label: t('aboutUs.stat3Label') },
+                ].map((s) => (
+                  <div key={s.label} className="border-l-2 border-brand-600 pl-4">
+                    <div className="text-3xl font-black text-brand-300">{s.value}</div>
+                    <div className="text-xs text-brand-500 mt-1 leading-tight">{s.label}</div>
+                  </div>
+                ))}
+              </div>
+
+              <Link
+                href={link('/asesorias')}
+                className="inline-flex items-center gap-2 bg-brand-400 text-brand-950 px-7 py-3.5 rounded-xl font-bold hover:bg-brand-300 transition-all shadow-lg shadow-brand-900/40"
+              >
+                {t('aboutUs.ctaLabel')} →
+              </Link>
+            </div>
+
+            {/* Right: profile card */}
+            <div className="flex justify-center lg:justify-end">
+              <div className="relative w-full max-w-sm">
+                {/* Glow behind card */}
+                <div className="absolute inset-0 bg-brand-500/10 rounded-3xl blur-2xl scale-110" />
+
+                <div className="relative bg-brand-900/60 backdrop-blur-sm border border-brand-700/50 rounded-3xl p-8 shadow-2xl">
+                  {/* Avatar */}
+                  <div className="flex justify-center mb-6">
+                    <div className="relative">
+                      <div className="w-28 h-28 rounded-2xl bg-gradient-to-br from-brand-600 to-brand-800 flex items-center justify-center shadow-xl shadow-brand-950/60">
+                        <span className="text-5xl font-black text-white">C</span>
+                      </div>
+                      <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-brand-400 rounded-lg flex items-center justify-center shadow-md">
+                        <span className="text-brand-950 text-xs">🐄</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Name & title */}
+                  <div className="text-center mb-6">
+                    <h3 className="text-xl font-black text-white">Carlos Eduardo Pinzon</h3>
+                    <p className="text-brand-400 text-sm mt-1">Founder & Head of Operations</p>
+                  </div>
+
+                  {/* Divider */}
+                  <div className="border-t border-brand-700/50 mb-6" />
+
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-2 justify-center">
+                    {[
+                      { icon: Award, label: t('aboutUs.tag1') },
+                      { icon: MapPin, label: t('aboutUs.tag2') },
+                      { icon: Users, label: t('aboutUs.tag3') },
+                      { icon: BarChart3, label: t('aboutUs.tag4') },
+                    ].map(({ icon: Icon, label }) => (
+                      <span
+                        key={label}
+                        className="inline-flex items-center gap-1.5 bg-brand-800/70 border border-brand-700/50 text-brand-300 text-xs px-3 py-1.5 rounded-full"
+                      >
+                        <Icon size={11} />
+                        {label}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>

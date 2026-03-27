@@ -40,6 +40,24 @@
       "subtitle": "Obtén orientación personalizada de Carlos Eduardo Pinzon — más de 20 años en ganadería colombiana.",
       "book": "Reservar Sesión"
     },
+    "aboutUs": {
+      "badge": "Sobre Nosotros",
+      "title": "El Experto Detrás de",
+      "titleHighlight": "Cada Operación",
+      "bio1": "Carlos Eduardo Pinzon lleva más de dos décadas construyendo una de las operaciones ganaderas más confiables de Colombia. Empezando con una sola finca en Córdoba, ha desarrollado una red que abarca las fértiles tierras de Antioquia y los vastos Llanos Orientales.",
+      "bio2": "Su filosofía es simple: gestión transparente, hatos saludables y retornos reales para los inversores. Carlos supervisa personalmente cada campaña en Toros.co — desde la selección del ganado hasta la coordinación de la venta final.",
+      "stat1Value": "20+",
+      "stat1Label": "Años de Experiencia",
+      "stat2Value": "3",
+      "stat2Label": "Regiones Cubiertas",
+      "stat3Value": "500+",
+      "stat3Label": "Inversores Atendidos",
+      "tag1": "Ganadero Certificado",
+      "tag2": "Córdoba · Antioquia · Llanos",
+      "tag3": "Manejo de Hatos",
+      "tag4": "Agro-Finanzas",
+      "ctaLabel": "Trabajar con Carlos"
+    },
     "trust": {
       "title": "¿Por qué Toros.co?",
       "item1Title": "Operaciones Verificadas",
