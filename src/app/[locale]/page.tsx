@@ -59,16 +59,26 @@ function HomeContent({
   return (
     <>
       {/* Hero */}
-      <section className="relative min-h-[92vh] bg-gradient-to-br from-brand-950 via-brand-900 to-brand-800 flex items-center overflow-hidden">
-        {/* Decorative circles */}
-        <div className="absolute top-20 right-10 w-96 h-96 bg-brand-700/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-10 left-10 w-64 h-64 bg-brand-500/10 rounded-full blur-2xl" />
+      <section className="relative min-h-[92vh] flex items-center overflow-hidden bg-brand-950">
+        {/* Cow background image with green tint */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/images/cow-pattern.svg')" }}
+        />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        {/* Green gradient overlay for depth & brand feel */}
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-950/90 via-brand-900/75 to-brand-800/60" />
+
+        {/* Animated glow orbs */}
+        <div className="absolute top-20 right-10 w-[500px] h-[500px] bg-brand-500/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-10 left-10 w-72 h-72 bg-brand-400/8 rounded-full blur-2xl" />
+        <div className="absolute top-1/2 right-1/4 w-48 h-48 bg-brand-300/5 rounded-full blur-2xl" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="max-w-3xl">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 bg-brand-700/40 border border-brand-600/50 text-brand-300 px-4 py-2 rounded-full text-sm font-medium mb-8">
-              <span>🐄</span>
+            <div className="inline-flex items-center gap-2 bg-brand-600/30 border border-brand-400/40 text-brand-300 px-4 py-2 rounded-full text-sm font-semibold mb-8 backdrop-blur-sm shadow-lg shadow-brand-900/30">
+              <span className="text-base">🐄</span>
               <span>{t('hero.badge')}</span>
             </div>
 
@@ -101,7 +111,7 @@ function HomeContent({
         </div>
 
         {/* Stats bar */}
-        <div className="absolute bottom-0 left-0 right-0 bg-brand-950/60 backdrop-blur-sm border-t border-brand-800/50">
+        <div className="absolute bottom-0 left-0 right-0 z-10 bg-brand-950/70 backdrop-blur-md border-t border-brand-700/40">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 grid grid-cols-2 md:grid-cols-4 gap-4">
             {stats.map((s) => (
               <div key={s.label} className="text-center">
