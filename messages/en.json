@@ -7,7 +7,7 @@
     "signin": "Sign In",
     "signup": "Get Started",
     "signout": "Sign Out",
-    "logo": "Toros.co"
+    "logo": "Cowsfunding.co"
   },
   "home": {
     "hero": {
@@ -46,7 +46,7 @@
       "title": "Meet the Expert Behind",
       "titleHighlight": "Every Operation",
       "bio1": "Carlos Eduardo Pinzon has spent over two decades building one of Colombia's most trusted cattle operations. Starting with a single farm in Córdoba, he has grown a network spanning the fertile plains of Antioquia and the vast Llanos Orientales.",
-      "bio2": "His philosophy is simple: transparent management, healthy herds, and real returns for investors. Carlos personally oversees every campaign on Toros.co — from selecting the cattle to coordinating the final sale.",
+      "bio2": "His philosophy is simple: transparent management, healthy herds, and real returns for investors. Carlos personally oversees every campaign on Cowsfunding.co — from selecting the cattle to coordinating the final sale.",
       "stat1Value": "20+",
       "stat1Label": "Years Experience",
       "stat2Value": "3",
@@ -60,7 +60,7 @@
       "ctaLabel": "Work with Carlos"
     },
     "trust": {
-      "title": "Why Toros.co?",
+      "title": "Why Cowsfunding.co?",
       "item1Title": "Verified Operations",
       "item1Desc": "Every campaign is audited before going live. Herd counts, farm location, and veterinary records are verified.",
       "item2Title": "Real-Time Tracking",
@@ -155,7 +155,7 @@
   },
   "auth": {
     "signinTitle": "Welcome back",
-    "signinSubtitle": "Sign in to your Toros.co account",
+    "signinSubtitle": "Sign in to your Cowsfunding.co account",
     "signupTitle": "Create your account",
     "signupSubtitle": "Start investing in Colombian cattle today",
     "email": "Email Address",

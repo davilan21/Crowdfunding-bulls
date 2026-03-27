@@ -42,7 +42,7 @@ export default function SignInPage() {
         <div className="text-center mb-8">
           <Link href={`/${locale}`} className="inline-flex items-center gap-2">
             <span className="text-4xl">🐄</span>
-            <span className="text-2xl font-black text-white">Toros.co</span>
+            <span className="text-2xl font-black text-white">Cowsfunding.co</span>
           </Link>
         </div>
 

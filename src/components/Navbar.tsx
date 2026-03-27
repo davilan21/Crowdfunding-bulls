@@ -23,7 +23,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link href={link('/')} className="flex items-center gap-2">
             <span className="text-2xl">🐄</span>
-            <span className="text-xl font-bold text-brand-800">Toros.co</span>
+            <span className="text-xl font-bold text-brand-800">Cowsfunding.co</span>
           </Link>
 
           {/* Desktop nav */}
