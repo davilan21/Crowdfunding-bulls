@@ -247,6 +247,21 @@
     "submit": "Publicar Campaña",
     "success": "¡Campaña creada con éxito!"
   },
+  "calculator": {
+    "badge": "Simulador de Inversión",
+    "title": "Calcula tu Retorno",
+    "subtitle": "Ajusta los controles para ver cómo crece tu inversión en una campaña ganadera.",
+    "amountLabel": "Monto de Inversión (USD)",
+    "returnRateLabel": "Tasa de Retorno Anual",
+    "durationLabel": "Duración de la Campaña",
+    "months": "meses",
+    "projectionTitle": "Tu Proyección",
+    "youInvest": "Inviertes",
+    "expectedReturn": "Retorno Esperado",
+    "perMonth": "Por Mes (equiv.)",
+    "totalAtMaturity": "Total al Vencimiento",
+    "disclaimer": "* Las proyecciones son ilustrativas. Los retornos reales dependen de la campaña."
+  },
   "common": {
     "loading": "Cargando...",
     "error": "Algo salió mal. Por favor intenta de nuevo.",

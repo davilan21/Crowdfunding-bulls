@@ -247,6 +247,21 @@
     "submit": "Publish Campaign",
     "success": "Campaign created successfully!"
   },
+  "calculator": {
+    "badge": "Investment Simulator",
+    "title": "Calculate Your Returns",
+    "subtitle": "Adjust the sliders to see how your investment grows with a cattle campaign.",
+    "amountLabel": "Investment Amount (USD)",
+    "returnRateLabel": "Annual Return Rate",
+    "durationLabel": "Campaign Duration",
+    "months": "months",
+    "projectionTitle": "Your Projection",
+    "youInvest": "You Invest",
+    "expectedReturn": "Expected Return",
+    "perMonth": "Per Month (equiv.)",
+    "totalAtMaturity": "Total at Maturity",
+    "disclaimer": "* Projections are illustrative. Actual returns depend on the campaign."
+  },
   "common": {
     "loading": "Loading...",
     "error": "Something went wrong. Please try again.",

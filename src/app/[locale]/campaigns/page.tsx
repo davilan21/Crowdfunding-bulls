@@ -1,6 +1,7 @@
 import { useTranslations, useLocale } from 'next-intl'
 import { prisma } from '@/lib/prisma'
 import CampaignCard from '@/components/CampaignCard'
+import InvestmentCalculator from '@/components/InvestmentCalculator'
 
 async function getCampaigns() {
   return prisma.campaign.findMany({
@@ -62,6 +63,8 @@ function CampaignsContent({
           </div>
         )}
       </div>
+
+      <InvestmentCalculator />
     </div>
   )
 }
