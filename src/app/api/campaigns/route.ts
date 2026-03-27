@@ -35,10 +35,20 @@ export async function POST(req: NextRequest) {
       title, titleEs, description, descriptionEs,
       targetAmount, returnRate, durationMonths,
       cowCount, breed, location, minInvestment, imageUrl,
+      videoUrl, mediaGallery, hasInsurance, insuranceDetails,
     } = body
 
     const endDate = new Date()
     endDate.setMonth(endDate.getMonth() + Number(durationMonths))
+
+    // Normalize mediaGallery: accept comma-separated string or array, store as JSON
+    let galleryJson: string | undefined
+    if (mediaGallery) {
+      const urls = Array.isArray(mediaGallery)
+        ? mediaGallery
+        : String(mediaGallery).split(',').map((s: string) => s.trim()).filter(Boolean)
+      galleryJson = JSON.stringify(urls)
+    }
 
     const campaign = await prisma.campaign.create({
       data: {
@@ -53,7 +63,11 @@ export async function POST(req: NextRequest) {
         breed,
         location,
         minInvestment: Number(minInvestment) || 500,
-        imageUrl,
+        imageUrl: imageUrl || null,
+        videoUrl: videoUrl || null,
+        mediaGallery: galleryJson || null,
+        hasInsurance: Boolean(hasInsurance),
+        insuranceDetails: insuranceDetails || null,
         status: 'ACTIVE',
         startDate: new Date(),
         endDate,
